@@ -3,11 +3,12 @@ import unittest
 
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
+from pymongo import MongoClient
 
 from deputados_federais_crawler.deputados_federais_crawler import \
     settings as my_settings
-from deputados_federais_crawler.deputados_federais_crawler.spiders.deputados_federais import \
-    FederalCongressmenCrawler
+from deputados_federais_crawler.deputados_federais_crawler.spiders.\
+    deputados_federais import FederalCongressmenCrawler
 
 
 class TestSpiders(unittest.TestCase):
@@ -30,25 +31,37 @@ class TestSpiders(unittest.TestCase):
         crawler_settings.setmodule(module=my_settings)
         crawler_process = CrawlerProcess(settings=crawler_settings)
         crawler_process.crawl(FederalCongressmenCrawler)
-        crawler_process.start()
+        crawler_process.start(stop_after_crawl=True)
 
-    def test_congressmen_json_not_null(self):
+    def connect_to_collection(self):
+        client = MongoClient(my_settings.MONGO_URI)
+        congressmen_db = client.congressmen
+        congressmen_collection = congressmen_db.congressmen
+
+        return congressmen_collection
+
+    def test_congressmen_not_null(self):
         self.assertIsNotNone(
             self.congressmen_json,
             "There aren't any congressmen data in the json file!"
         )
-
-    def test_first_congressmen_json_data(self):
         self.assertEqual(
-            self.congressmen_json[0]['nome'][0],
+            self.congressmen_json[0]['nome'],
             "ABEL MESQUITA JR.",
             "The nome of the first congressman isn't 'ABEL MESQUITA JR.'"
         )
         self.assertEqual(
-            self.congressmen_json[0]['gabinete'][0],
+            self.congressmen_json[0]['gabinete'],
             "248",
             "The gabinete of the first congressman isn't '248"
         )
+
+        congressmen_collection = self.connect_to_collection()
+        self.assertIsNotNone(
+            congressmen_collection.find_one({'nome': 'ABEL MESQUITA JR.'}),
+            "There aren't any congressmen data in the database collection!"
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
