@@ -9,11 +9,4 @@ import scrapy
 
 
 class DeputadosFederaisCrawlerItem(scrapy.Item):
-    nome = scrapy.Field()
-    partido = scrapy.Field()
-    uf = scrapy.Field()
-    gabinete = scrapy.Field()
-    anexo = scrapy.Field()
-    fone = scrapy.Field()
-    fax = scrapy.Field()
-    email = scrapy.Field()
+    pass

@@ -29,14 +29,23 @@ class FederalCongressmenCrawler(scrapy.Spider):
 
             nome, partido, uf, gabinete, anexo, fone, fax, email = self.parse_congressman_data(congressmen)
 
-            item = DeputadosFederaisCrawlerItem()
-            item['nome'] = nome,
-            item['partido'] = partido,
-            item['uf'] = uf,
-            item['gabinete'] = gabinete,
-            item['anexo'] = anexo,
-            item['fone'] = fone,
-            item['fax'] = fax,
-            item['email'] = email,
+            # item = DeputadosFederaisCrawlerItem()
+            # item['nome'] = nome,
+            # item['partido'] = partido,
+            # item['uf'] = uf,
+            # item['gabinete'] = gabinete,
+            # item['anexo'] = anexo,
+            # item['fone'] = fone,
+            # item['fax'] = fax,
+            # item['email'] = email,
 
-            yield item
+            yield {
+                'nome': nome,
+                'partido': partido,
+                'uf': uf,
+                'gabinete': gabinete,
+                'anexo': anexo,
+                'fone': fone,
+                'fax': fax,
+                'email': email
+            }
