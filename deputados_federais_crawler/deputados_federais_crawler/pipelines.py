@@ -34,17 +34,3 @@ class DeputadosFederaisCrawlerPipeline(object):
     def process_item(self, item, spider):
         self.db[self.collection_name].insert_one(dict(item))
         return item
-
-
-class JsonWriterPipeline(object):
-
-    def open_spider(self, spider):
-        self.file = open('../congressmen_data.json', 'w')
-
-    def close_spider(self, spider):
-        self.file.close()
-
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + "\n"
-        self.file.write(line)
-        return item
