@@ -1,26 +1,14 @@
-import json
 import unittest
-
-from scrapy.crawler import CrawlerProcess
-from scrapy.settings import Settings
 from pymongo import MongoClient
 
+from deputados_federais_crawler.main import RunCrawler
 from deputados_federais_crawler.deputados_federais_crawler import \
     settings as my_settings
-from deputados_federais_crawler.deputados_federais_crawler.spiders.\
-    deputados_federais import FederalCongressmenCrawler
 
 
 class TestSpiders(unittest.TestCase):
     def setUp(self):
-        self.execute_crawler()
-
-    def execute_crawler(self):
-        crawler_settings = Settings()
-        crawler_settings.setmodule(module=my_settings)
-        crawler_process = CrawlerProcess(settings=crawler_settings)
-        crawler_process.crawl(FederalCongressmenCrawler)
-        crawler_process.start(stop_after_crawl=True)
+        RunCrawler(my_settings)
 
     def connect_to_mongodb_cluster(self):
         client = MongoClient(my_settings.MONGO_URI)

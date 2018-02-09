@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import os
 # Scrapy settings for deputados_federais_crawler project
 #
 # For simplicity, this file contains only settings considered important or
@@ -68,8 +68,8 @@ ITEM_PIPELINES = {
    'deputados_federais_crawler.deputados_federais_crawler.pipelines.DeputadosFederaisCrawlerPipeline': 300
 }
 
-MONGO_URI = 'mongodb://api_user:apiuser2018#@cluster0-shard-00-00-xmzvt.mongodb.net:27017,cluster0-shard-00-01-xmzvt.mongodb.net:27017,cluster0-shard-00-02-xmzvt.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
-MONGO_DATABASE = 'congressmen'
+MONGO_URI = os.getenv('MONGO_URI')
+MONGO_DATABASE = os.getenv('MONGO_DATABASE')
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
