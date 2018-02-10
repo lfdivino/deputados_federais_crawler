@@ -14,7 +14,6 @@ app = Flask(__name__)
 api = Api(app)
 
 data_base = DeputadosDb(
-    os.getenv('MONGO_URI'), os.getenv('MONGO_DATABASE'), 'congressmen'
 )
 
 
@@ -28,7 +27,11 @@ class ScrapyDeputados(Resource):
 
 class BuscarDeputado(Resource):
     def get(self, nome_deputado):
-        deputado = data_base.buscar_deputados(nome_deputado)
+        if nome_deputado not in ['gabinete', 'estado', 'partido']:
+            deputado = data_base.buscar_deputados(nome_deputado)
+        else:
+            return "A chamada da rota foi feita de maneira incorreta, " \
+                   "o %s não foi informado!" % nome_deputado
 
         return deputado
 
@@ -41,7 +44,7 @@ class ListaDeputados(Resource):
 
 
 class BuscarDeputadoGabinete(Resource):
-    def get(self, numero_gabinete):
+    def get(self, numero_gabinete=None):
         if numero_gabinete:
             deputados = data_base.buscar_gabinete(numero_gabinete)
         else:
@@ -51,7 +54,7 @@ class BuscarDeputadoGabinete(Resource):
 
 
 class BuscarDeputadosPartido(Resource):
-    def get(self, partido):
+    def get(self, partido=None):
         if partido:
             deputados = data_base.buscar_partido(partido.upper())
         else:
@@ -61,7 +64,7 @@ class BuscarDeputadosPartido(Resource):
 
 
 class BuscarDeputadosEstado(Resource):
-    def get(self, estado):
+    def get(self, estado=None):
         if estado:
             deputados = data_base.buscar_estado(estado.upper())
         else:
@@ -81,4 +84,3 @@ api.add_resource(BuscarDeputadosEstado, '/api/v1/deputados/estado/<estado>')
 
 
 if __name__ == '__main__':
-    run_simple('0.0.0.0', 5000, app)
