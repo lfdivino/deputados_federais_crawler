@@ -29,6 +29,7 @@ class BuscarDeputado(Resource):
     def get(self, nome_deputado):
         if nome_deputado not in ['gabinete', 'estado', 'partido']:
             deputado = data_base.buscar_deputados(nome_deputado)
+            deputado = data_base.buscar_deputados(nome_deputado.upper())
         else:
             return "A chamada da rota foi feita de maneira incorreta, " \
                    "o %s não foi informado!" % nome_deputado
