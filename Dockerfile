@@ -1,6 +1,5 @@
 FROM alpine:3.6
 
-# Credits.
 MAINTAINER Luiz Felipe do Divino "lf.divino@gmail.com"
 
 RUN apk add --update \
@@ -23,7 +22,6 @@ RUN apk add --update \
 
 USER root
 
-# add directly the jar
 ADD api.py /foo/api.py
 ADD requirements.txt /foo/requirements.txt
 ADD deputados_api/ /foo/deputados_api

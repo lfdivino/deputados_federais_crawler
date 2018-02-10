@@ -61,8 +61,8 @@ class BuscarDeputadosEstado(Resource):
         return deputados
 
 
-api.add_resource(ScrapyDeputados,'/api/v1/scrapy/deputados')
-api.add_resource(ListaDeputados,'/api/v1/deputados')
+api.add_resource(ScrapyDeputados, '/api/v1/scrapy/deputados')
+api.add_resource(ListaDeputados, '/api/v1/deputados')
 api.add_resource(BuscarDeputado, '/api/v1/deputados/<nome_deputado>')
 api.add_resource(
     BuscarDeputadoGabinete, '/api/v1/deputados/gabinete/<numero_gabinete>'

@@ -1,5 +1,4 @@
 import scrapy
-from ..items import DeputadosFederaisCrawlerItem
 
 
 class FederalCongressmenCrawler(scrapy.Spider):
@@ -27,17 +26,8 @@ class FederalCongressmenCrawler(scrapy.Spider):
     def parse(self, response):
         for congressmen in response.css('#demaisInformacoes'):
 
-            nome, partido, uf, gabinete, anexo, fone, fax, email = self.parse_congressman_data(congressmen)
-
-            # item = DeputadosFederaisCrawlerItem()
-            # item['nome'] = nome,
-            # item['partido'] = partido,
-            # item['uf'] = uf,
-            # item['gabinete'] = gabinete,
-            # item['anexo'] = anexo,
-            # item['fone'] = fone,
-            # item['fax'] = fax,
-            # item['email'] = email,
+            nome, partido, uf, gabinete, anexo, fone, fax, email = \
+                self.parse_congressman_data(congressmen)
 
             yield {
                 'nome': nome,
