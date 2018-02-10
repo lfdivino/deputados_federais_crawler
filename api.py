@@ -64,9 +64,11 @@ class BuscarDeputadosEstado(Resource):
 api.add_resource(ScrapyDeputados,'/api/v1/scrapy/deputados')
 api.add_resource(ListaDeputados,'/api/v1/deputados')
 api.add_resource(BuscarDeputado, '/api/v1/deputados/<nome_deputado>')
-api.add_resource(BuscarDeputadoGabinete, '/api/v1/gabinete/<numero_gabinete>')
-api.add_resource(BuscarDeputadosPartido, '/api/v1/partido/<partido>')
-api.add_resource(BuscarDeputadosEstado, '/api/v1/estado/<estado>')
+api.add_resource(
+    BuscarDeputadoGabinete, '/api/v1/deputados/gabinete/<numero_gabinete>'
+)
+api.add_resource(BuscarDeputadosPartido, '/api/v1/deputados/partido/<partido>')
+api.add_resource(BuscarDeputadosEstado, '/api/v1/deputados/estado/<estado>')
 
 
 if __name__ == '__main__':
