@@ -13,6 +13,8 @@ class RunCrawler(object):
     def execute_crawler(self):
         crawler_settings = Settings()
         crawler_settings.setmodule(module=self.spider_settings)
-        crawler_runner = CrawlerRunner(settings=crawler_settings).crawl(FederalCongressmenCrawler)
+        crawler_runner = CrawlerRunner(settings=crawler_settings).crawl(
+            FederalCongressmenCrawler
+        )
         crawler_runner.addBoth(lambda _: reactor.stop())
         reactor.run()

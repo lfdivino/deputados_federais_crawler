@@ -11,7 +11,9 @@ import os
 
 BOT_NAME = 'deputados_federais_crawler'
 
-SPIDER_MODULES = ['deputados_federais_crawler.deputados_federais_crawler.spiders']
+SPIDER_MODULES = [
+   'deputados_federais_crawler.deputados_federais_crawler.spiders'
+]
 NEWSPIDER_MODULE = 'deputados_federais_crawler.spiders'
 
 
