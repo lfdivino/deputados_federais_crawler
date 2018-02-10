@@ -46,8 +46,11 @@ class DeputadosDb(object):
         deputado_domain = {}
         if nome_deputado:
             deputado_domain['nome'] = nome_deputado
+            deputado_from_db = self.db_collection.find_one(deputado_domain)
+            if not deputado_from_db:
+                return "Deputado com este nome não foi encontrado!"
             deputados = {
-                'Deputados': self.db_collection.find_one(deputado_domain)
+                'Deputados': deputado_from_db
             }
             del deputados['Deputados']['_id']
         else:
@@ -58,6 +61,8 @@ class DeputadosDb(object):
 
     def buscar_gabinete(self, gabinete):
         deputados = self.db_collection.find_one({'gabinete': gabinete})
+        if not deputados:
+            return "Gabinete não encontrado!"
         del deputados['_id']
 
         return deputados
