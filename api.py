@@ -42,21 +42,30 @@ class ListaDeputados(Resource):
 
 class BuscarDeputadoGabinete(Resource):
     def get(self, numero_gabinete):
-        deputados = data_base.buscar_gabinete(numero_gabinete)
+        if numero_gabinete:
+            deputados = data_base.buscar_gabinete(numero_gabinete)
+        else:
+            return "Deve ser inserido o número de um gabinete!"
 
         return deputados
 
 
 class BuscarDeputadosPartido(Resource):
     def get(self, partido):
-        deputados = data_base.buscar_partido(partido.upper())
+        if partido:
+            deputados = data_base.buscar_partido(partido.upper())
+        else:
+            return "Deve ser inserido a sigla de um partido!"
 
         return deputados
 
 
 class BuscarDeputadosEstado(Resource):
     def get(self, estado):
-        deputados = data_base.buscar_estado(estado.upper())
+        if estado:
+            deputados = data_base.buscar_estado(estado.upper())
+        else:
+            return "Deve ser inserido a sigla de um estado!"
 
         return deputados
 
