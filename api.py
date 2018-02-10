@@ -14,6 +14,7 @@ app = Flask(__name__)
 api = Api(app)
 
 data_base = DeputadosDb(
+    os.getenv('MONGO_URI'), os.getenv('MONGO_DATABASE'), 'congressmen'
 )
 
 
@@ -85,3 +86,4 @@ api.add_resource(BuscarDeputadosEstado, '/api/v1/deputados/estado/<estado>')
 
 
 if __name__ == '__main__':
+    run_simple('0.0.0.0', 5000, app)
