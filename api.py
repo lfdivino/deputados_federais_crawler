@@ -83,5 +83,4 @@ api.add_resource(BuscarDeputadosEstado, '/api/v1/deputados/estado/<estado>')
 
 
 if __name__ == '__main__':
-    # run_simple('0.0.0.0', 5000, app)
-    app.run(debug=True)
+    run_simple('0.0.0.0', 5000, app)

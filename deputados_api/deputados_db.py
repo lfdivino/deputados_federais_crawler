@@ -61,6 +61,8 @@ class DeputadosDb(object):
 
     def buscar_gabinete(self, gabinete):
         deputados = self.db_collection.find_one({'gabinete': gabinete})
+        if not deputados:
+            return "Gabinete não encontrado!"
         del deputados['_id']
 
         return deputados
