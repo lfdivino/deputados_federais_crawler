@@ -1,32 +1,33 @@
-FROM alpine:3.6
+FROM ubuntu:16.04
 
+# Credits.
 MAINTAINER Luiz Felipe do Divino "lf.divino@gmail.com"
 
-RUN apk add --update \
-    python3 \
-    py-pip \
-    py-setuptools \
-    python-dev \
-    python3-dev \
-    libffi-dev \
-    build-base \
-    alpine-sdk \
-    openssl-dev \
-    libxslt-dev \
-  && pip install flask -U \
-  && pip install incremental -U \
-  && rm -rf /var/cache/apk/* \
-  && adduser -D app \
-  && mkdir /foo  \
-  && chown -R app:app /foo
+# Ambiente básico
+RUN apt-get update
+RUN apt-get install -y -q build-essential
+RUN apt-get install -y python3 python3-pip wget
+RUN apt-get install -y python3-dev
 
-USER root
+# Criar um diretório de trabalho.
+RUN mkdir deployment
 
-ADD api.py /foo/api.py
-ADD requirements.txt /foo/requirements.txt
-ADD deputados_api/ /foo/deputados_api
-ADD deputados_federais_crawler/ /foo/deputados_federais_crawler
+# Instalar virtualenv.
+RUN pip3 install virtualenv
 
-RUN pip3 install -r /foo/requirements.txt
+# Adicionar arquivo de dependencias.
+ADD requirements.txt /deployment/requirements.txt
 
-CMD python3 /foo/api.py
+# Adicionais os arquivos da aplicação.
+ADD api.py /deployment/api.py
+ADD deputados_api/ /deployment/deputados_api
+ADD deputados_federais_crawler_app/ /deployment/deputados_federais_crawler_app
+ADD setup.py /deployment/setup.py
+
+# Rodar o virtualenv.
+RUN virtualenv /deployment/env/
+RUN /deployment/env/bin/pip3 install wheel
+RUN /deployment/env/bin/pip3 install -r /deployment/requirements.txt
+RUN /deployment/env/bin/pip3 install /deployment/
+
+EXPOSE 8008
