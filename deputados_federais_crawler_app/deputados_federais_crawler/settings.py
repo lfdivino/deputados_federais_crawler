@@ -9,10 +9,10 @@ import os
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'deputados_federais_crawler'
+BOT_NAME = 'deputados_federais_crawler_app'
 
 SPIDER_MODULES = [
-   'deputados_federais_crawler.deputados_federais_crawler.spiders'
+   'deputados_federais_crawler_app.deputados_federais_crawler.spiders'
 ]
 NEWSPIDER_MODULE = 'deputados_federais_crawler.spiders'
 
@@ -67,11 +67,11 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'deputados_federais_crawler.deputados_federais_crawler.pipelines.DeputadosFederaisCrawlerPipeline': 300
+   'deputados_federais_crawler_app.deputados_federais_crawler.pipelines.DeputadosFederaisCrawlerPipeline': 300
 }
 
-MONGO_URI = os.getenv('MONGO_URI')
-MONGO_DATABASE = os.getenv('MONGO_DATABASE')
+MONGO_URI = 'mongodb://api_user:apiuser2018#@cluster0-shard-00-00-xmzvt.mongodb.net:27017,cluster0-shard-00-01-xmzvt.mongodb.net:27017,cluster0-shard-00-02-xmzvt.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
+MONGO_DATABASE = 'congressmen'
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
