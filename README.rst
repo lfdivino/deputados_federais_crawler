@@ -19,6 +19,30 @@ Para esta api foram utilizadas as seguintes ferramentas:
 Instalação
 ==========
 
+Primeiramente é necessário clonar este repositório e depois acessar a pasta raiz do projeto
+
+1 - Instalação em virtualenv local
+=================================
+
+Para instalar a aplicação localmente basta rodar o comando na pasta raiz ::
+
+    ./instalador.sh
+
+Após o término da instalação é necessário ativar o virtualenv criado utilizando o comando ::
+
+    sourc bin/activate
+
+Assim basta utilizar o seguinte comando para iniciar a API ::
+
+    python api.py
+
+Para rodar os testes unitários basta utilizar o seguinte comando ::
+
+    python deputados_federais_crawler_app/tests/test_spider.py
+
+2 - Instalação via Docker
+=========================
+
 Para a instalação da api basta rodar o comando build do Docker na pasta raiz do projeto onde está o Dockerfile ::
 
     sudo docker build --no-cache -t api_deputados .
@@ -54,7 +78,7 @@ Maintainers
 - Luiz_ Felipe_ Divino_ (owner)
 
 .. Deputados Crawler links
-.. _Website: http://www.camara.leg.br/internet/deputado/Dep_Lista.asp?Legislatura=55&Partido=QQ&SX=QQ&Todos=None&UF=QQ&condic=QQ&forma=lista&nome=&ordem=nome&origem=None
+.. _Website: http://www.camara.leg.br/internet/deputado/Dep_Lista_foto.asp?Legislatura=55&Partido=QQ&SX=QQ&Todos=None&UF=QQ&condic=QQ&forma=lista&nome=&ordem=nome&origem=None
 
 .. Ferramentas Utilizadas links
 .. _Atlas: https://cloud.mongodb.com/
