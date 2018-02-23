@@ -9,9 +9,8 @@ from deputados_api.deputados_db import DeputadosDb
 
 class TestSpiders(unittest.TestCase):
     def setUp(self):
-        pass
-        # crawler = DeputadosCrawler(my_settings)
-        # crawler.executar_crawler()
+        crawler = DeputadosCrawler(my_settings)
+        crawler.executar_crawler()
 
     def test_dados_deputados_federais(self):
         '''Testar a conexão com o banco de dados e se os dados são semelhantes
