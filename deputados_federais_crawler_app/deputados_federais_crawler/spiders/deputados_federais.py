@@ -22,7 +22,7 @@ class DeputadosFederaisCrawler(scrapy.Spider):
         return nome, foto, partido, uf, gabinete, anexo, fone, fax, email
 
     def parse(self, response):
-        for deputado in response.css("#depFoto > td"):
+        for deputado in response.css("#depFoto").css("td"):
             if not deputado.css('font::attr(color)'):
                 nome, foto, partido, uf, gabinete, anexo, fone, fax, email = \
                     self.parse_dados_deputado(deputado)
