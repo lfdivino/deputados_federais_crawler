@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import os
-
 from flask import Flask
 from flask_restful import Api, Resource
 from werkzeug.serving import run_simple
 
-from deputados_federais_crawler.main import RunCrawler
-from deputados_federais_crawler.deputados_federais_crawler import \
+from deputados_federais_crawler_app.main import DeputadosCrawler
+from deputados_federais_crawler_app.deputados_federais_crawler import \
     settings as my_settings
 from deputados_api.deputados_db import DeputadosDb
 
@@ -14,14 +12,14 @@ app = Flask(__name__)
 api = Api(app)
 
 data_base = DeputadosDb(
-    os.getenv('MONGO_URI'), os.getenv('MONGO_DATABASE'), 'congressmen'
+    my_settings.MONGO_URI, my_settings.MONGO_DATABASE, 'congressmen'
 )
 
 
 class ScrapyDeputados(Resource):
     def get(self):
-        deputados_crawler = RunCrawler(my_settings)
-        deputados_crawler.execute_crawler()
+        deputados_crawler = DeputadosCrawler(my_settings)
+        deputados_crawler.executar_crawler()
 
         return '200, OK'
 
@@ -29,7 +27,6 @@ class ScrapyDeputados(Resource):
 class BuscarDeputado(Resource):
     def get(self, nome_deputado):
         if nome_deputado not in ['gabinete', 'estado', 'partido']:
-            deputado = data_base.buscar_deputados(nome_deputado)
             deputado = data_base.buscar_deputados(nome_deputado.upper())
         else:
             return "A chamada da rota foi feita de maneira incorreta, " \
