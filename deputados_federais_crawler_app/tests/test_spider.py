@@ -13,8 +13,8 @@ class TestSpiders(unittest.TestCase):
         crawler.executar_crawler()
 
     def test_dados_deputados_federais(self):
-        '''Testar a conexão com o banco de dados e se os dados são semelhantes
-         a fonte de onde foram retirados'''
+        """Testar a conexão com o banco de dados e se os dados são semelhantes
+         a fonte de onde foram retirados"""
         base_dados = DeputadosDb(
             my_settings.MONGO_URI,
             my_settings.MONGO_DATABASE, 'congressmen'
