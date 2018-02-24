@@ -30,15 +30,16 @@ Para instalar a aplicação localmente basta rodar o comando na pasta raiz ::
 
 Após o término da instalação é necessário ativar o virtualenv criado utilizando o comando ::
 
-    sourc bin/activate
+    source bin/activate
 
 Assim basta utilizar o seguinte comando para iniciar a API ::
 
-    python api.py
+    python deputados_api/api.py
 
 Para rodar os testes unitários basta utilizar o seguinte comando ::
 
     python deputados_federais_crawler_app/tests/test_spider.py
+    python deputados_federais_crawler_app/tests/test_api.py
 
 2 - Instalação via Docker
 =========================
