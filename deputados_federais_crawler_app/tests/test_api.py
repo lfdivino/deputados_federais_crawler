@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-import api
+import deputados_api.api as api
 import requests
 import json
 import sys
