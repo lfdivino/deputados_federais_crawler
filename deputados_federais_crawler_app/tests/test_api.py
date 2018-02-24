@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
 import deputados_api.api as api
-import requests
 import json
 import sys
 
@@ -12,15 +11,6 @@ from deputados_federais_crawler_app.tests.constantes_teste import \
     DEPUTADOS_BUSCA_PARTIDO_INEXISTENTE, DEPUTADOS_BUSCA_PARTIDO_SEM_SIGLA, \
     DEPUTADOS_BUSCA_ESTADO, DEPUTADOS_BUSCA_ESTADO_INEXISTENTE, \
     DEPUTADOS_BUSCA_ESTADO_SEM_SIGLA
-
-
-class TestApiUsandoRequests(unittest.TestCase):
-    def test_mostrar_dados_deputados(self):
-        resultado = requests.get('http://localhost:5000/api/v1/deputados')
-        self.assertEqual(
-            resultado.json(), DEPUTADOS_JSON,
-            "Resultado do request na API diferente dos dados reais!"
-        )
 
 
 class TestApiUtilizandoRotas(unittest.TestCase):
