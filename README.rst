@@ -50,11 +50,12 @@ Para a instalação da api basta rodar o comando build do Docker na pasta raiz d
 
 Para executar a api através do Docker basta executar o comando run também na pasta raiz do projeto ::
 
-    sudo docker run --env-file env.list -it -p 5000:5000 api_deputados /deployment/env/bin/python /deployment/api.py
+    sudo docker run --env-file env.list -it -p 5000:5000 api_deputados /deployment/env/bin/python /deployment/deputados_api/api.py
 
 Para executar os testes através do Docker basta executar o comando run também na pasta raiz do projeto ::
 
     sudo docker run --env-file env.list -it -p 5000:5000 api_deputados /deployment/env/bin/python /deployment/deputados_federais_crawler_app/tests/test_spider.py
+    sudo docker run --env-file env.list -it -p 5000:5000 api_deputados /deployment/env/bin/python /deployment/deputados_federais_crawler_app/tests/test_api.py
 
 Rotas da API
 ============

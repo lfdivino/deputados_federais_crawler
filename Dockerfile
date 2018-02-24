@@ -19,7 +19,6 @@ RUN pip3 install virtualenv
 ADD requirements.txt /deployment/requirements.txt
 
 # Adicionais os arquivos da aplicação.
-ADD api.py /deployment/api.py
 ADD deputados_api/ /deployment/deputados_api
 ADD deputados_federais_crawler_app/ /deployment/deputados_federais_crawler_app
 ADD setup.py /deployment/setup.py
